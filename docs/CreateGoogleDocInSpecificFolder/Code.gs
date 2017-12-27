@@ -83,7 +83,6 @@ function getFolder(Path)
       {
         var folderTemp = SubFolder.next();
         SubFolder = folderTemp.searchFolders("title contains '"+FolderName+"'");
-        Logger.log(loopnum+':'+FolderName);
       }
     }
   }
