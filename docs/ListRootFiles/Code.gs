@@ -13,7 +13,7 @@
 
 // This function performs the implementation of listing files in the Root folder and store the list to specific folder.
 
-function  myfunction()
+function  runMe()
 {
   // Set Doc file name
   var MyDocName = "GoogleDriveRootFilesList";
