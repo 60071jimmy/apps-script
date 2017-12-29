@@ -11,6 +11,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This function performs the implementation of creating a file in the specific folder.
+// Usage: Set the MyDocName and the MyFolderFullPath, then just run Example function.
+
 function Example() {
   // Set Doc file name
   var MyDocName = "TestFile5";
