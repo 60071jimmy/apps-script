@@ -69,6 +69,7 @@ function CreateGoogleDocInSpecificFolder(docName, FolderFullPath)
   } 
 }
 
+// getFolder function could return the folder which is locate at Path.
 function getFolder(Path)
 {
   var SubFolder;
