@@ -24,6 +24,11 @@ function Example() {
   var SpecificFolder = "/";
   
   CreateGoogleDocInSpecificFolder(ListDocName, ListDocFullPath);
+  ListFoldersInSpecificFolder(ListDocName, ListDocFullPath, SpecificFolder);
+}
+
+function ListFoldersInSpecificFolder(ListDocName, ListDocFullPath, SpecificFolder)
+{
   var DocFiles = GoogleDocsInSpecificFolder(ListDocName, ListDocFullPath);
   
   while(DocFiles.hasNext())
