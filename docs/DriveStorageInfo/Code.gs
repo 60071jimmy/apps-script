@@ -13,6 +13,7 @@
 
 // This function performs the implementation of analyzing the usage of the Google Drive.
 // Usage: Set the DriveStorageInfoDocName, and the DriveStorageInfoDocFullPath, then just run Example function.
+// Notice: The DriveStorageInfoDocName can't be as same as the folder name.
 function Example() {
   // Set Doc file name.
   var DriveStorageInfoDocName = "DriveStorageInfoDoc";
