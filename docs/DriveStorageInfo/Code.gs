@@ -15,7 +15,7 @@
 // Usage: Set the DriveStorageInfoDocName, and the DriveStorageInfoDocFullPath, then just run Example function.
 function Example() {
   // Set Doc file name.
-  var DriveStorageInfoDocName = "DriveStorageInfo";
+  var DriveStorageInfoDocName = "DriveStorageInfoDoc";
   
   // Set Doc file path.
   var DriveStorageInfoDocFullPath = "//Google Apps Script//TestFiles//DriveStorageInfo";
