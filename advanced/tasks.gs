@@ -1,4 +1,22 @@
-// [START listTaskLists]
+/**
+ * Copyright Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START apps_script_tasks_lists_task_lists]
+/**
+ * Lists tasks titles and IDs.
+ */
 function listTaskLists() {
   var taskLists = Tasks.Tasklists.list();
   if (taskLists.items) {
@@ -11,9 +29,13 @@ function listTaskLists() {
     Logger.log('No task lists found.');
   }
 }
-// [END listTaskLists]
+// [END apps_script_tasks_lists_task_lists]
 
-// [START listTasks]
+// [START apps_script_tasks_list_tasks]
+/**
+ * Lists task items for a provided tasklist ID.
+ * @param  {string} taskListId The tasklist ID.
+ */
 function listTasks(taskListId) {
   var tasks = Tasks.Tasks.list(taskListId);
   if (tasks.items) {
@@ -26,9 +48,13 @@ function listTasks(taskListId) {
     Logger.log('No tasks found.');
   }
 }
-// [END listTasks]
+// [END apps_script_tasks_list_tasks]
 
-// [START addTask]
+// [START apps_script_tasks_add_task]
+/**
+ * Adds a task to a tasklist.
+ * @param {string} taskListId The tasklist to add to.
+ */
 function addTask(taskListId) {
   var task = {
     title: 'Pick up dry cleaning',
@@ -37,4 +63,4 @@ function addTask(taskListId) {
   task = Tasks.Tasks.insert(task, taskListId);
   Logger.log('Task with ID "%s" was created.', task.id);
 }
-// [END addTask]
+// [END apps_script_tasks_add_task]

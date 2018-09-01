@@ -1,4 +1,22 @@
-// [START listAccounts]
+/**
+ * Copyright Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START apps_script_analytics_accounts]
+/**
+ * Lists Analytics accounts.
+ */
 function listAccounts() {
   var accounts = Analytics.Management.Accounts.list();
   if (accounts.items && accounts.items.length) {
@@ -14,6 +32,10 @@ function listAccounts() {
   }
 }
 
+/**
+ * Lists web properites for an Analytics account.
+ * @param  {string} accountId The account ID.
+ */
 function listWebProperties(accountId) {
   var webProperties = Analytics.Management.Webproperties.list(accountId);
   if (webProperties.items && webProperties.items.length) {
@@ -30,6 +52,11 @@ function listWebProperties(accountId) {
   }
 }
 
+/**
+ * Logs a list of Analytics accounts profiles.
+ * @param  {string} accountId     The Analytics account ID
+ * @param  {string} webPropertyId The web property ID
+ */
 function listProfiles(accountId, webPropertyId) {
   // Note: If you experience "Quota Error: User Rate Limit Exceeded" errors
   // due to the number of accounts or profiles you have, you may be able to
@@ -47,19 +74,23 @@ function listProfiles(accountId, webPropertyId) {
     Logger.log('\t\tNo web properties found.');
   }
 }
-// [END listAccounts]
+// [END apps_script_analytics_accounts]
 
-// [START runReport]
+// [START apps_script_analytics_reports]
+/**
+ * Runs a report of an Analytics profile ID. Creates a sheet with the report.
+ * @param  {string} profileId The profile ID.
+ */
 function runReport(profileId) {
   var today = new Date();
   var oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-  var startDate = Utilities.formatDate(oneWeekAgo, Session.getTimeZone(),
+  var startDate = Utilities.formatDate(oneWeekAgo, Session.getScriptTimeZone(),
       'yyyy-MM-dd');
-  var endDate = Utilities.formatDate(today, Session.getTimeZone(),
+  var endDate = Utilities.formatDate(today, Session.getScriptTimeZone(),
       'yyyy-MM-dd');
 
-  var tableId  = 'ga:' + profileId;
+  var tableId = 'ga:' + profileId;
   var metric = 'ga:visits';
   var options = {
     'dimensions': 'ga:source,ga:keyword',
@@ -90,4 +121,4 @@ function runReport(profileId) {
     Logger.log('No rows returned.');
   }
 }
-// [END runReport]
+// [END apps_script_analytics_reports]

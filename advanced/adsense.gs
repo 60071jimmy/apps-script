@@ -1,7 +1,26 @@
-// [START listAdClients]
+/**
+ * Copyright Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START apps_script_adsense_list_ad_clients]
+/**
+ * Logs a lists Ad clients.
+ */
 function listAdClients() {
   // Retrieve ad client list in pages and log data as we receive it.
-  var pageToken, adClients;
+  var pageToken;
+  var adClients;
   do {
     adClients = AdSense.Adclients.list({
       maxResults: 50,
@@ -21,11 +40,16 @@ function listAdClients() {
     pageToken = adClients.nextPageToken;
   } while (pageToken);
 }
-// [END listAdClients]
+// [END apps_script_adsense_list_ad_clients]
 
-// [START listAdUnits]
+// [START apps_script_adsense_list_ad_units]
+/**
+ * Lists ad units.
+ * @param  {string} adClientId The ad client ID.
+ */
 function listAdUnits(adClientId) {
-  var pageToken, adUnits;
+  var pageToken;
+  var adUnits;
   do {
     adUnits = AdSense.Adunits.list(adClientId, {
       maxResults: 50,
@@ -44,9 +68,13 @@ function listAdUnits(adClientId) {
     pageToken = adUnits.nextPageToken;
   } while (pageToken);
 }
-// [END listAdUnits]
+// [END apps_script_adsense_list_ad_units]
 
-// [START generateReport]
+// [START apps_script_adsense_generate_report]
+/**
+ * Generates a spreadsheet report for an ad client.
+ * @param {string} adClientId The ad client ID
+ */
 function generateReport(adClientId) {
   // Prepare report.
   var today = new Date();
@@ -90,10 +118,10 @@ function generateReport(adClientId) {
 
 /**
  * Escape special characters for a parameter being used in a filter.
- * @param parameter the parameter to be escaped.
- * @return the escaped parameter.
+ * @param {string} parameter The parameter to be escaped.
+ * @return {string} The escaped parameter.
  */
 function escapeFilterParameter(parameter) {
   return parameter.replace('\\', '\\\\').replace(',', '\\,');
 }
-// [END generateReport]
+// [END apps_script_adsense_generate_report]

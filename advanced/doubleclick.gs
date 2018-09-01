@@ -1,7 +1,22 @@
 /**
+ * Copyright Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START apps_script_doubleclick_list_user_profiles]
+/**
  * Logs all of the user profiles available in the account.
  */
-// [START listUserProfiles]
 function listUserProfiles() {
   // Retrieve the list of available user profiles
   var profiles = DoubleClickCampaigns.UserProfiles.list();
@@ -15,18 +30,18 @@ function listUserProfiles() {
     }
   }
 }
-// [END listUserProfiles]
+// [END apps_script_doubleclick_list_user_profiles]
 
+// [START apps_script_doubleclick_list_active_campaigns]
 /**
  * Logs names and ID's of all active campaigns.
  * Note the use of paging tokens to retrieve the whole list.
  */
-// [START listActiveCampaigns]
 function listActiveCampaigns() {
   var profileId = '1234567'; // Replace with your profile ID.
   var fields = 'nextPageToken,campaigns(id,name)';
-
-  var result, pageToken;
+  var result;
+  var pageToken;
   do {
     result = DoubleClickCampaigns.Campaigns.list(profileId, {
       'archived': false,
@@ -43,13 +58,13 @@ function listActiveCampaigns() {
     pageToken = result.nextPageToken;
   } while (pageToken);
 }
-// [END listActiveCampaigns]
+// [END apps_script_doubleclick_list_active_campaigns]
 
+// [START apps_script_doubleclick_create_advertiser_and_campaign]
 /**
  * Creates a new advertiser, and creates a new campaign with that advertiser.
  * The campaign is set to last for one month.
  */
-// [START createAdvertiserAndCampaign]
 function createAdvertiserAndCampaign() {
   var profileId = '1234567'; // Replace with your profile ID.
 
@@ -69,6 +84,15 @@ function createAdvertiserAndCampaign() {
   var landingPageId = DoubleClickCampaigns.AdvertiserLandingPages
       .insert(landingPage, profileId).id;
 
+  var landingPage = {
+    advertiserId: advertiserId,
+    archived: false,
+    name: 'Example landing page',
+    url: 'https://www.google.com'
+  };
+  var landingPageId = DoubleClickCampaigns.AdvertiserLandingPages
+      .insert(landingPage, profileId).id;
+
   var campaignStart = new Date();
   // End campaign after 1 month.
   var campaignEnd = new Date();
@@ -83,4 +107,4 @@ function createAdvertiserAndCampaign() {
   };
   DoubleClickCampaigns.Campaigns.insert(campaign, profileId);
 }
-// [END createAdvertiserAndCampaign]
+// [END apps_script_doubleclick_create_advertiser_and_campaign]

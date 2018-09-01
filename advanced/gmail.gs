@@ -1,8 +1,23 @@
 /**
+ * Copyright Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START apps_script_gmail_label]
+/**
  * Lists the user's labels, including name, type,
  * ID and visibility information.
  */
-// [START listLabelInfo]
 function listLabelInfo() {
   var response =
     Gmail.Users.Labels.list('me');
@@ -11,13 +26,13 @@ function listLabelInfo() {
     Logger.log(JSON.stringify(label));
   }
 }
-// [END listLabelInfo]
+// [END apps_script_gmail_label]
 
+// [START apps_script_gmail_inbox_snippets]
 /**
  * Lists, for each thread in the user's Inbox, a
  * snippet associated with that thread.
  */
-// [START listInboxSnippets]
 function listInboxSnippets() {
   var pageToken;
   do {
@@ -33,15 +48,15 @@ function listInboxSnippets() {
     pageToken = threadList.nextPageToken;
   } while (pageToken);
 }
-// [END listInboxSnippets]
+// [END apps_script_gmail_inbox_snippets]
 
 
+// [START apps_script_gmail_history]
 /**
  * Gets a history record ID associated with the most
  * recently sent message, then logs all the message IDs
  * that have changed since that message was sent.
  */
-// [START logRecentHistory]
 function logRecentHistory() {
   // Get the history ID associated with the most recent
   // sent message.
@@ -81,4 +96,4 @@ function logRecentHistory() {
     Logger.log('Message Changed: %s', id);
   });
 }
-// [END logRecentHistory]
+// [END apps_script_gmail_history]
