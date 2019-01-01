@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// [START apps_script_bracketmaker]
 // This script works with the Brackets Test spreadsheet to create a tournament bracket
 // given a list of players or teams.
 
@@ -36,15 +37,20 @@ function onOpen() {
  */
 function createBracket() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+  // [START apps_script_bracketmaker_range_players_1]
   var rangePlayers = ss.getRangeByName(RANGE_PLAYER1);
+  // [END apps_script_bracketmaker_range_players_1]
   var sheetControl = ss.getSheetByName(SHEET_PLAYERS);
   var sheetResults = ss.getSheetByName(SHEET_BRACKET);
 
+  // [START apps_script_bracketmaker_range_players_2]
   // Get the players from column A.  We assume the entire column is filled here.
   rangePlayers = rangePlayers.offset(0, 0, sheetControl.getMaxRows() -
       rangePlayers.getRowIndex() + 1, 1);
   var players = rangePlayers.getValues();
+  // [END apps_script_bracketmaker_range_players_2]
 
+  // [START apps_script_bracketmaker_num_players_1]
   // Now figure out how many players there are(ie don't count the empty cells)
   var numPlayers = 0;
   for (var i = 0; i < players.length; i++) {
@@ -54,6 +60,7 @@ function createBracket() {
     numPlayers++;
   }
   players = players.slice(0, numPlayers);
+  // [END apps_script_bracketmaker_num_players_1]
 
   // Provide some error checking in case there are too many or too few players/teams.
   if (numPlayers > 64) {
@@ -61,6 +68,7 @@ function createBracket() {
     return; // Early exit
   }
 
+  // [START apps_script_bracketmaker_num_players_2]
   if (numPlayers < 3) {
     Browser.msgBox('Sorry, you must have at least 3 players.');
     return; // Early exit
@@ -68,6 +76,7 @@ function createBracket() {
 
   // First clear the results sheet and all formatting
   sheetResults.clear();
+  // [END apps_script_bracketmaker_num_players_2]
 
   var upperPower = Math.ceil(Math.log(numPlayers) / Math.log(2));
 
@@ -109,6 +118,7 @@ function createBracket() {
   }
 }
 
+// [START apps_script_bracketmaker_set_bracket_item]
 /**
  * Sets the value of an item in the bracket and the color.
  * @param {Range} rng The Spreadsheet Range.
@@ -121,6 +131,7 @@ function setBracketItem_(rng, players) {
   }
   rng.setBackgroundColor('yellow');
 }
+// [END apps_script_bracketmaker_set_bracket_item]
 
 /**
  * Sets the color and width for connector cells.
@@ -131,3 +142,4 @@ function setConnector_(sheet, rng) {
   sheet.setColumnWidth(rng.getColumnIndex(), CONNECTOR_WIDTH);
   rng.setBackgroundColor('green');
 }
+// [END apps_script_bracketmaker]
